@@ -1,0 +1,391 @@
+;======================================================================
+;
+; Copyright (c) ASUSTek Computer Inc. (2018)
+;
+; Module Name:
+;     asussci2.inf
+;
+; Abstract:
+;     INF file for installing ASUS System Control Interface V2
+;
+; Installation Notes:
+;     	
+;======================================================================
+[Version]
+Signature			= "$Windows NT$"
+Class                   	= System
+ClassGUID               	= {4D36E97D-E325-11CE-BFC1-08002BE10318}
+Provider			= "ASUSTek Computer Inc."
+DriverVer			= 09/28/2020,2.2.29.10
+CatalogFile.ntamd64		= asussci2.cat
+
+
+[Manufacturer]
+%MfgName% = ASUP, ntamd64
+
+[ASUP.ntamd64]
+%DeviceDesc1% = NO_DRV64, ACPI\ASUS2018
+
+[NO_DRV64]
+Include = machine.inf
+Needs = NO_DRV
+CopyFiles = PackageCopySoftwareManager    ;Software Manager service
+CopyFiles = PackageCopyOptimization	  ;Optimization service
+CopyFiles = PackageCopyDiagnosis	  ;System Diagnosis service
+CopyFiles = PackageCopyAnalysis			;Analysis service
+CopyFiles = PackageCopyAsusLinkRemote      ;AsusLinkRemote service
+CopyFiles = PackageCopyAsusLinkRemoteLicense      ;AsusLinkRemote service
+CopyFiles = PackageCopyLinkNear           ;Link Near service
+
+[NO_DRV64.Services]
+Include = machine.inf
+Needs = NO_DRV.Services
+AddService = ATKWMIACPIIO, , Optimization_Drv_ServiceInstall			;Optimization driver
+AddService = ASUSOptimization, 0x00000800, Optimization_Srv_ServiceInstall		;Optimization service
+AddService = ASUSSystemDiagnosis, 0x00000800, SystemDiagnosisServiceInstall     ;System Diagnosis service
+AddService = ASUSSAIO,0x00000800,Analysis_DriverInstall				         ;Analysis driver
+AddService = ASUSSystemAnalysis,0x00000800,Analysis_ServiceInstall		     ;Analysis service
+AddService = ASUSLinkRemote,0x00000800,AsusLinkRemote_ServiceInstall		     ;AsusLinkRemote service
+AddService = ASUSLinkNear,0x00000800,LinkNear_ServiceInstall                    ;Link Near service
+AddService = ASUSLinkNearExt,0x00000800,LinkNearExt_ServiceInstall                    ;Link Near Ext service
+AddService = ASUSSoftwareManager, 0x00000800, SoftwareManager_Usersrv_ServiceInstall    ;Software Manager service
+
+[DestinationDirs]
+DefaultDestDir 		    = 13
+PackageCopySoftwareManager  = 13,%SoftwareManagerFolder%    ;Software Manager service
+PackageCopyOptimization	    = 13,%OptimizationFolder%       ;Optimization service
+PackageCopyDiagnosis 	    = 13,%SystemDiagnosisFolder%	;System Diagnosis Service
+PackageCopyAnalysis 	= 13,%AnalysisFolder%		;Analysis service
+PackageCopyAsusLinkRemote 		= 13,%AsusLinkRemoteFolder%		;AsusLinkRemote service
+PackageCopyAsusLinkRemoteLicense = 13,%AsusLinkRemoteLicenseFolder%		;AsusLinkRemote service
+PackageCopyLinkNear         = 13,%LinkNearFolder%            ;Link Near service
+
+; ==============================================================
+;                    Software Manager service
+; ==============================================================
+[PackageCopySoftwareManager]
+alvupdt.dll
+alvupdt.ini
+AsusSetup.exe
+AsusSetupEx.exe
+AsusSoftwareManager.exe
+bshelper.dll
+bsitf.dll
+bsitf.sys
+BusinessIntelligenceCollection.dll
+BusinessIntelligenceTransfer.dll
+BusinessIntelligenceCPlusLib.dll
+AsusSoftwareManagerAgent.exe
+GiftBox.Common.dll
+GiftBox.Core.dll
+GiftBoxServiceAgent.dll
+protobuf-net.dll
+AsusUpdateChecker.exe
+
+[SoftwareManager_Usersrv_ServiceInstall]
+DisplayName    = "ASUS Software Manager"
+ServiceType    = 0x00000010      ; SERVICE_WIN32_SHARE_PROCESS
+StartType      = 2               ; SERVICE_DEMAND_START, SERVICE_AUTO_START ==> 2
+ErrorControl   = 1               ; SERVICE_ERROR_NORMAL
+ServiceBinary  = %13%\%SoftwareManagerFolder%\AsusSoftwareManager.exe
+
+
+; ==============================================================
+;                    Optimization service                         
+; ==============================================================
+[PackageCopyOptimization]
+AsusHotkeyExec.exe
+AsusOptimizationStartupTask.exe
+AsusOptimization.exe
+AsusOSD.exe
+atkwmiacpi64.sys
+AsusSplendid.exe
+CCTAdjust.dll
+VideoEnhance_v406_20180511_x64.dll
+ASUS Optimization 36D18D69AFC3.xml
+AsusWiFiSmartConnect.exe
+AsusWiFiRangeboost.exe
+AsusDataFocus.exe
+
+[Optimization_Drv_ServiceInstall]
+DisplayName    = "ATKWMIACPI Driver"
+ServiceBinary  = %13%\%OptimizationFolder%\atkwmiacpi64.sys
+ServiceType    = 1
+StartType      = 1
+ErrorControl   = 1
+
+[Optimization_Srv_ServiceInstall]
+DisplayName    = "ASUS Optimization"
+ServiceBinary  = %13%\%OptimizationFolder%\AsusOptimization.exe
+ServiceType    = 16
+StartType      = 2
+ErrorControl   = 1
+LoadOrderGroup = ShellSvcGroup
+
+[PackageCopyDiagnosis]
+AsusSystemDiagnosis.exe
+CreatModifyTaskSchdl.exe
+ModifyMyASUSSetting.exe
+ModifyRegFile.ps1
+
+[SystemDiagnosisServiceInstall]
+DisplayName    = "ASUS System Diagnosis"
+ServiceType    = 0x00000010      ; SERVICE_WIN32_SHARE_PROCESS
+StartType      = 2               ; SERVICE_DEMAND_START, SERVICE_AUTO_START ==> 2
+ErrorControl   = 1               ; SERVICE_ERROR_NORMAL
+ServiceBinary  = %13%\%SystemDiagnosisFolder%\AsusSystemDiagnosis.exe
+
+
+; ==============================================================
+;                    Analysis service                         
+; ==============================================================
+[PackageCopyAnalysis]
+AsusSystemAnalysis.exe
+acthelper.dll
+AsusWinIo64.dll
+default.json
+ASUSSAIO.sys
+ChkReg.dll
+
+[Analysis_DriverInstall]
+DisplayName    = "ASUS System Analysis Driver"
+ServiceBinary  = %13%\%AnalysisFolder%\ASUSSAIO.sys
+ServiceType    = 1
+StartType      = 1
+ErrorControl   = 1
+
+[Analysis_ServiceInstall]
+DisplayName    = "ASUS System Analysis"
+ServiceBinary  = %13%\%AnalysisFolder%\AsusSystemAnalysis.exe
+ServiceType    = 16
+StartType      = 2
+ErrorControl   = 1
+
+
+; ==============================================================
+;                    AsusLinkRemote service
+; ==============================================================
+[PackageCopyAsusLinkRemote]
+AsusLinkRemote.exe
+AsusLinkRemoteAgent.exe
+AsusLinkRemoteAgent.exe.config
+AsusLinkRemoteConfig.exe
+AsusRealtekWiFiConf.exe
+AsusRealtekEthConf.exe
+AsusIntelWiFiConf.exe
+AsusQualcommWiFiConf.exe
+ASUS.Zaw.CmdManager.dll
+ASUS.Zaw.CmdManager.dll.config
+athr_swoi_wifi.dll
+Autofac.dll
+Autofac.Extensions.DependencyInjection.dll
+AutofacSerilogIntegration.dll
+IntelWifiHelper.dll
+LumiSoft.Net.dll
+Microsoft.AspNet.SignalR.Client.dll
+Microsoft.Extensions.DependencyInjection.Abstractions.dll
+Microsoft.WindowsAPICodePack.dll
+Microsoft.WindowsAPICodePack.Shell.dll
+Microsoft.WindowsAPICodePack.ShellExtensions.dll
+Newtonsoft.Json.dll
+protobuf-net_2.4.0.dll
+RealWoWDLL.dll
+RealWoWDLL-eth.dll
+Serilog.dll
+Serilog.Enrichers.Context.dll
+Serilog.Enrichers.HttpContextData.dll
+Serilog.Formatting.Compact.dll
+Serilog.Settings.AppSettings.dll
+Serilog.Sinks.Console.dll
+Serilog.Sinks.File.dll
+Serilog.Sinks.LogTrace.dll
+Serilog.Sinks.PeriodicBatching.dll
+Serilog.Sinks.RollingFile.dll
+Serilog.Sinks.Seq.dll
+Serilog.Sinks.Trace.dll
+System.IO.Compression.dll
+System.Net.Http.dll
+System.Net.Http.Extensions.dll
+System.Net.WebSockets.dll
+System.Runtime.WindowsRuntime.dll
+Thinktecture.Relay.OnPremiseConnector.dll
+Topshelf.dll
+Topshelf.Serilog.dll
+Udt.dll
+UdtWrapper.dll
+ZawServiceAgent.dll
+PRAPIHelper.dll
+WebAPICore.dll
+WebAPICoreInterface.dll
+
+[PackageCopyAsusLinkRemoteLicense]
+LICENSE_LumiSoft.Net.txt
+LICENSE_Serilog.txt
+LICENSE_Thinktecture.Relay.txt
+LICENSE_UdtProtocol.txt
+LICENSE_protobuf.txt
+LICENSE_RapidJSON.txt
+
+[AsusLinkRemote_ServiceInstall]
+DisplayName    = "ASUS Link Remote"
+ServiceType    = 0x00000010      ; SERVICE_WIN32_SHARE_PROCESS
+StartType      = 2               ; SERVICE_DEMAND_START, SERVICE_AUTO_START ==> 2
+ErrorControl   = 1               ; SERVICE_ERROR_NORMAL
+ServiceBinary  = %13%\%AsusLinkRemoteFolder%\AsusLinkRemote.exe
+
+; ==============================================================
+;                    Link Near service                         
+; ==============================================================
+[PackageCopyLinkNear]
+AsusLinkNear.exe
+AsusLinkWP2P.exe
+AsusLinkBLE.dll
+AsusLinkNearExt.exe
+
+[LinkNear_ServiceInstall]
+DisplayName    = "ASUS Link Near"
+ServiceBinary  = %13%\%LinkNearFolder%\AsusLinkNear.exe
+ServiceType    = 16
+StartType      = 2
+ErrorControl   = 1
+
+
+[LinkNearExt_ServiceInstall]
+DisplayName    = "ASUS Link Near Extension"
+ServiceBinary  = %13%\%LinkNearFolder%\AsusLinkNearExt.exe
+ServiceType    = 16
+StartType      = 2
+ErrorControl   = 1
+
+[SourceDisksFiles]
+; ================== Analysis service, diskid = 3 ===========================
+AsusSystemAnalysis.exe = 3
+acthelper.dll = 3
+AsusWinIo64.dll = 3
+default.json = 3
+ASUSSAIO.sys = 3
+ChkReg.dll = 3
+; ================== System Diagnosis service, diskid = 4 ===========================
+AsusSystemDiagnosis.exe = 4
+CreatModifyTaskSchdl.exe = 4
+ModifyMyASUSSetting.exe = 4
+ModifyRegFile.ps1 = 4
+; ================== Optimization service, diskid = 5 ===========================
+AsusHotkeyExec.exe = 5
+AsusOptimizationStartupTask.exe = 5
+AsusOptimization.exe = 5
+AsusOSD.exe = 5
+atkwmiacpi64.sys = 5
+AsusSplendid.exe = 5
+CCTAdjust.dll = 5 
+VideoEnhance_v406_20180511_x64.dll = 5
+ASUS Optimization 36D18D69AFC3.xml = 5
+AsusWiFiSmartConnect.exe = 5
+AsusWiFiRangeboost.exe = 5
+AsusDataFocus.exe = 5
+
+; ================== Software Manager service, diskid = 6 ===========================
+alvupdt.dll = 6
+alvupdt.ini = 6
+AsusSetup.exe = 6
+AsusSetupEx.exe = 6
+AsusSoftwareManager.exe = 6
+bshelper.dll = 6
+bsitf.dll = 6
+bsitf.sys = 6
+BusinessIntelligenceCollection.dll = 6
+BusinessIntelligenceTransfer.dll = 6
+BusinessIntelligenceCPlusLib.dll = 6
+AsusSoftwareManagerAgent.exe = 6
+GiftBox.Common.dll = 6
+GiftBox.Core.dll = 6
+GiftBoxServiceAgent.dll = 6
+protobuf-net.dll = 6
+AsusUpdateChecker.exe = 6
+
+
+; ================== AsusLinkRemote service, diskid = 7 ===========================
+AsusLinkRemote.exe = 7
+AsusLinkRemoteAgent.exe = 7
+AsusLinkRemoteAgent.exe.config = 7
+AsusLinkRemoteConfig.exe = 7
+AsusRealtekWiFiConf.exe = 7
+AsusRealtekEthConf.exe = 7
+AsusQualcommWiFiConf.exe = 7
+AsusIntelWiFiConf.exe = 7
+ASUS.Zaw.CmdManager.dll = 7
+ASUS.Zaw.CmdManager.dll.config = 7
+athr_swoi_wifi.dll = 7
+Autofac.dll = 7
+Autofac.Extensions.DependencyInjection.dll = 7
+AutofacSerilogIntegration.dll = 7
+IntelWifiHelper.dll = 7
+LumiSoft.Net.dll = 7
+Microsoft.AspNet.SignalR.Client.dll = 7
+Microsoft.Extensions.DependencyInjection.Abstractions.dll = 7
+Microsoft.WindowsAPICodePack.dll = 7
+Microsoft.WindowsAPICodePack.Shell.dll = 7
+Microsoft.WindowsAPICodePack.ShellExtensions.dll = 7
+Newtonsoft.Json.dll = 7
+protobuf-net_2.4.0.dll = 7
+RealWoWDLL.dll = 7
+RealWoWDLL-eth.dll = 7
+Serilog.dll = 7
+Serilog.Enrichers.Context.dll = 7
+Serilog.Enrichers.HttpContextData.dll = 7
+Serilog.Formatting.Compact.dll = 7
+Serilog.Settings.AppSettings.dll = 7
+Serilog.Sinks.Console.dll = 7
+Serilog.Sinks.File.dll = 7
+Serilog.Sinks.LogTrace.dll = 7
+Serilog.Sinks.PeriodicBatching.dll = 7
+Serilog.Sinks.RollingFile.dll = 7
+Serilog.Sinks.Seq.dll = 7
+Serilog.Sinks.Trace.dll = 7
+System.IO.Compression.dll = 7
+System.Net.Http.dll = 7
+System.Net.Http.Extensions.dll = 7
+System.Net.WebSockets.dll = 7
+System.Runtime.WindowsRuntime.dll = 7
+Thinktecture.Relay.OnPremiseConnector.dll = 7
+Topshelf.dll = 7
+Topshelf.Serilog.dll = 7
+Udt.dll = 7
+UdtWrapper.dll = 7
+ZawServiceAgent.dll = 7
+PRAPIHelper.dll = 7
+WebAPICore.dll = 7
+WebAPICoreInterface.dll = 7
+LICENSE_LumiSoft.Net.txt = 8
+LICENSE_Serilog.txt = 8
+LICENSE_Thinktecture.Relay.txt = 8
+LICENSE_UdtProtocol.txt = 8
+LICENSE_protobuf.txt = 8
+LICENSE_RapidJSON.txt = 8
+
+; ================== Link Near service, diskid = 9 ===========================
+AsusLinkNear.exe = 9
+AsusLinkWP2P.exe = 9
+AsusLinkBLE.dll = 9
+AsusLinkNearExt.exe = 9
+
+[SourceDisksNames]
+1 = %MfgName%,,,
+3 = %MfgName%,,,\%AnalysisFolder%		;Analysis service, diskid = 3
+4 = %MfgName%,,,\%SystemDiagnosisFolder%		;System Diagnosis Service, diskid = 4
+5 = %MfgName%,,,\%OptimizationFolder%			;Optimization service, diskid = 5
+6 = %MfgName%,,,\%SoftwareManagerFolder%                    ;Software Manager service, diskid = 6
+7 = %MfgName%,,,\%AsusLinkRemoteFolder%                  ;AsusLinkRemote service, diskid = 7
+8 = %MfgName%,,,\%AsusLinkRemoteLicenseFolder%           ;AsusLinkRemote license, diskid = 8
+9 = %MfgName%,,,\%LinkNearFolder%                       ;Link Near service, diskid = 9
+
+[Strings]
+MfgName			= "ASUS"
+DeviceDesc1    		= "ASUS System Control Interface V2"
+SoftwareManagerFolder   = "ASUSSoftwareManager"
+OptimizationFolder	= "ASUSOptimization"
+SystemDiagnosisFolder   = "ASUSSystemDiagnosis"
+AnalysisFolder		= "ASUSSystemAnalysis"
+AsusLinkRemoteFolder        = "ASUSLinkRemote"
+AsusLinkRemoteLicenseFolder           = "ASUSLinkRemoteLicense"
+LinkNearFolder    	= "ASUSLinkNear"

@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "649549571300",
+    "project_id": "porcnakan-2e215",
+    "storage_bucket": "porcnakan-2e215.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:649549571300:android:4005a9212d9cceee8538f1",
+        "android_client_info": {
+          "package_name": "com.example.porcnakan"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAkWcQIQ7xLXQEEVo5xrZcxftqZtrfl9QA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

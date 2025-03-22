@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <item name="teamSpinner" type="id" />
+    <item name="leagueTableRecyclerView" type="id" />
+    <item name="leagueTitle" type="id" />
+    <item name="email_login" type="id" />
+    <item name="password_login" type="id" />
+    <item name="btn_login" type="id" />
+    <item name="register_redirect" type="id" />
+    <item name="forgotPassword" type="id" />
+    <item name="guest_mode_button" type="id" />
+</resources>
