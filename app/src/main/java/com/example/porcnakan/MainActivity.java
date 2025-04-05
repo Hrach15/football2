@@ -62,7 +62,7 @@ public class MainActivity extends AppCompatActivity {
         });
 
         guestModeButton.setOnClickListener(v -> {
-            Intent guestIntent = new Intent(MainActivity.this, MainActivity.class);
+            Intent guestIntent = new Intent(MainActivity.this, teamchoose.class);
             guestIntent.putExtra("isGuest", true);
             startActivity(guestIntent);
             finish();

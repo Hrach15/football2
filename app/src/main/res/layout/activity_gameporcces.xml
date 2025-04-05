@@ -1,45 +1,55 @@
-<?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/main"
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".gameporcces">
+    android:orientation="vertical"
+    android:gravity="center"
+    android:padding="16dp">
 
+    <!-- My Team -->
     <TextView
-        android:id="@+id/textView13"
+        android:id="@+id/tvMyTeam"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Team A"
-        tools:layout_editor_absoluteX="124dp"
-        tools:layout_editor_absoluteY="34dp"
-        tools:ignore="MissingConstraints" />
+        android:text="My Team"
+        android:textSize="22sp"
+        android:textStyle="bold"
+        android:layout_marginBottom="10dp"/>
 
+    <!-- VS Text -->
     <TextView
-        android:id="@+id/textView14"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Team B"
-        tools:layout_editor_absoluteX="539dp"
-        tools:layout_editor_absoluteY="34dp"
-        tools:ignore="MissingConstraints" />
+        android:text="VS"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        android:layout_marginBottom="10dp"/>
 
+    <!-- Opponent Team -->
     <TextView
-        android:id="@+id/textView15"
+        android:id="@+id/tvOpponentTeam"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="score"
-        tools:layout_editor_absoluteX="261dp"
-        tools:layout_editor_absoluteY="34dp"
-        tools:ignore="MissingConstraints" />
+        android:text="Opponent Team"
+        android:textSize="22sp"
+        android:textStyle="bold"
+        android:layout_marginBottom="20dp"/>
 
+    <!-- GAME DAY at the Bottom -->
     <TextView
-        android:id="@+id/textView16"
+        android:id="@+id/tvGameDay"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="score"
-        tools:layout_editor_absoluteX="407dp"
-        tools:layout_editor_absoluteY="37dp"
-        tools:ignore="MissingConstraints" />
-</androidx.constraintlayout.widget.ConstraintLayout>
+        android:text="🏆 GAME DAY 🏆"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        android:textColor="#FFD700"
+        android:layout_marginTop="50dp"/>
+
+    <Button
+        android:id="@+id/btnSimulate"
+        android:layout_width="150dp"
+        android:layout_height="90dp"
+        android:text="simulate"
+        android:textSize="26dp"/>
+</LinearLayout>

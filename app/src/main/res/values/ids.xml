@@ -9,4 +9,5 @@
     <item name="register_redirect" type="id" />
     <item name="forgotPassword" type="id" />
     <item name="guest_mode_button" type="id" />
+    <item name="tvGameResult" type="id" />
 </resources>

@@ -13,19 +13,25 @@
         android:theme="@style/Theme.Porcnakan"
         tools:targetApi="31">
         <activity
+            android:name=".seetable"
+            android:exported="false" />
+        <activity
+            android:name=".simulate"
+            android:exported="false" />
+        <activity
             android:name=".RegisterActivity"
             android:exported="false" />
         <activity
             android:name=".gameporcces"
             android:exported="false" />
         <activity
-            android:name=".MyTeam"
-            android:exported="false" />
-        <activity
             android:name="com.example.MainScreen"
-            android:exported="false" />
+            android:exported="true" />
         <activity
             android:name="com.example.table"
+            android:exported="true" />
+        <activity
+            android:name=".MyTeam"
             android:exported="false" />
         <activity
             android:name=".teamchoose"

@@ -18,6 +18,7 @@ public class teamchoose extends AppCompatActivity {
     private Button playButton;
     private Map<String, List<String>> leagues;
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -32,7 +33,9 @@ public class teamchoose extends AppCompatActivity {
 
 
         playButton.setOnClickListener(v -> {
+            String selectedTeam = teamSpinner.getSelectedItem().toString();
             Intent intent = new Intent(teamchoose.this, table.class);
+            intent.putExtra("selectedTeam", selectedTeam);
             startActivity(intent);
         });
     }
@@ -47,7 +50,7 @@ public class teamchoose extends AppCompatActivity {
                 "Tottenham Hotspur", "West Ham United", "Wolverhampton Wanderers"));
 
         leagues.put("La Liga", Arrays.asList(
-                "Alavés", "Almería", "Athletic Club", "Atlético Madrid", "Barcelona", "Cádiz", "Celta Vigo",
+                "Alaves", "Almería", "Athletic Club", "Atlético Madrid", "Barcelona", "Cádiz", "Celta Vigo",
                 "Getafe", "Girona", "Granada", "Las Palmas", "Mallorca", "Osasuna", "Rayo Vallecano",
                 "Real Betis", "Real Madrid", "Real Sociedad", "Sevilla", "Valencia", "Villarreal"));
 
