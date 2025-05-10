@@ -12,8 +12,10 @@ import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
+import com.example.porcnakan.MainActivity;
 import com.example.porcnakan.R;
 import com.example.porcnakan.gameporcces;
+import com.example.porcnakan.teamchoose;
 
 public class MainScreen extends AppCompatActivity {
 
@@ -30,21 +32,40 @@ public class MainScreen extends AppCompatActivity {
             return insets;
         });
 
-        // Find the button by ID
+        // Find the buttons by ID
         Button startGameButton = findViewById(R.id.btnStartGame);
+        Button logOutButton = findViewById(R.id.btnLogOut);
 
-        // Check if button is found
+        // Check if start game button is found
         if (startGameButton == null) {
-            Toast.makeText(this, "Button not found!", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "Start Game Button not found!", Toast.LENGTH_SHORT).show();
             return;
         }
 
-        // Set click listener to navigate to gameporcces class
+        // Check if logout button is found
+        if (logOutButton == null) {
+            Toast.makeText(this, "Log Out Button not found!", Toast.LENGTH_SHORT).show();
+            return;
+        }
+
+        final String myTeam = getIntent().getStringExtra("myTeam");
         startGameButton.setOnClickListener(v -> {
-            Toast.makeText(this, "Starting Game...", Toast.LENGTH_SHORT).show();
-            Intent intent = new Intent(MainScreen.this, gameporcces.class);
+            Intent intent = new Intent(MainScreen.this, teamchoose.class);
+            intent.putExtra("myTeam", myTeam);
             startActivity(intent);
         });
 
+        // Add click listener for logout button
+        logOutButton.setOnClickListener(v -> {
+            // Show logout confirmation
+            Toast.makeText(this, "Logged out successfully", Toast.LENGTH_SHORT).show();
+
+            // Redirect to MainActivity
+            Intent intent = new Intent(MainScreen.this, MainActivity.class);
+            // Clear the activity stack to prevent going back to MainScreen
+            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+            startActivity(intent);
+            finish();
+        });
     }
 }

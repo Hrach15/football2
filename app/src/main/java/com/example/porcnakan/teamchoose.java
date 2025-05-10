@@ -35,8 +35,9 @@ public class teamchoose extends AppCompatActivity {
         playButton.setOnClickListener(v -> {
             String selectedTeam = teamSpinner.getSelectedItem().toString();
             Intent intent = new Intent(teamchoose.this, table.class);
-            intent.putExtra("selectedTeam", selectedTeam);
+            intent.putExtra("selectedTeam", selectedTeam); // This must match exactly
             startActivity(intent);
+
         });
     }
 
@@ -62,7 +63,7 @@ public class teamchoose extends AppCompatActivity {
 
         leagues.put("Serie A", Arrays.asList(
                 "Atalanta", "Bologna", "Cagliari", "Empoli", "Fiorentina", "Frosinone", "Genoa", "Inter Milan",
-                "Juventus", "Lazio", "Lecce", "AC Milan", "Monza", "Napoli", "Roma", "Salernitana",
+                "Juventus", "Lazio", "Lecce", "Milan", "Monza", "Napoli", "Roma", "Salernitana",
                 "Sassuolo", "Torino", "Udinese", "Verona"));
 
         leagues.put("Ligue 1", Arrays.asList(

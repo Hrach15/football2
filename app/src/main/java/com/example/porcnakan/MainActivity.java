@@ -10,6 +10,7 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.MainScreen;
 import com.google.firebase.auth.FirebaseAuth;
 public class MainActivity extends AppCompatActivity {
 
@@ -62,7 +63,7 @@ public class MainActivity extends AppCompatActivity {
         });
 
         guestModeButton.setOnClickListener(v -> {
-            Intent guestIntent = new Intent(MainActivity.this, teamchoose.class);
+            Intent guestIntent = new Intent(MainActivity.this, MainScreen.class);
             guestIntent.putExtra("isGuest", true);
             startActivity(guestIntent);
             finish();
@@ -75,7 +76,7 @@ public class MainActivity extends AppCompatActivity {
                     if (task.isSuccessful()) {
                         if (firebaseAuth.getCurrentUser() != null && firebaseAuth.getCurrentUser().isEmailVerified()) {
                             Toast.makeText(MainActivity.this, "Login Successful!", Toast.LENGTH_SHORT).show();
-                            Intent intent = new Intent(MainActivity.this, teamchoose.class);
+                            Intent intent = new Intent(MainActivity.this, MainScreen.class);
                             startActivity(intent);
                             finish();
                         } else {

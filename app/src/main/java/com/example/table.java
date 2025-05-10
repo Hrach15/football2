@@ -11,6 +11,7 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.porcnakan.R;
+import com.example.porcnakan.gameporcces;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -36,7 +37,7 @@ public class table extends AppCompatActivity {
 
         teamNameTextView = findViewById(R.id.teamNameTextView);
         matchListView = findViewById(R.id.matchListView);
-        next = findViewById(R.id.button);
+        next = findViewById(R.id.next);
 
         initializeLeagues();
 
@@ -52,7 +53,8 @@ public class table extends AppCompatActivity {
 
 
         next.setOnClickListener(v -> {
-            Intent intent = new Intent(table.this, MainScreen.class);
+            Intent intent = new Intent(table.this, gameporcces.class);
+            intent.putExtra("myTeam", selectedTeam);
             startActivity(intent);
         });
     }
@@ -72,7 +74,7 @@ public class table extends AppCompatActivity {
 
         leagueTeams.put("Serie A", List.of(
                 "Atalanta", "Bologna", "Cagliari", "Empoli", "Fiorentina", "Frosinone", "Genoa", "Inter Milan",
-                "Juventus", "Lazio", "Lecce", "AC Milan", "Monza", "Napoli", "Roma", "Salernitana",
+                "Juventus", "Lazio", "Lecce", "Milan", "Monza", "Napoli", "Roma", "Salernitana",
                 "Sassuolo", "Torino", "Udinese", "Verona"));
 
         leagueTeams.put("Bundesliga", List.of(
@@ -87,11 +89,11 @@ public class table extends AppCompatActivity {
                 "Toulouse", "Brest"));
     }
 
-    // Generate match list based on the selected team
+
     private List<String> generateMatchList(String selectedTeam) {
         List<String> matches = new ArrayList<>();
 
-        // Find the league the team belongs to
+
         for (Map.Entry<String, List<String>> entry : leagueTeams.entrySet()) {
             if (entry.getValue().contains(selectedTeam)) {
                 // Create matchups with other teams in the same league

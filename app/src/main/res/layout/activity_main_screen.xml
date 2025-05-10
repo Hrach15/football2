@@ -48,5 +48,15 @@
         android:textColor="@android:color/white"
         android:textSize="18sp" />
 
+    <Button
+        android:id="@+id/btnLogOut"
+        android:layout_width="130dp"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="10dp"
+        android:backgroundTint="@color/red"
+        android:padding="10dp"
+        android:text="Log Out"
+        android:textColor="@android:color/white"
+        android:textSize="18sp" />
 
 </LinearLayout>

@@ -10,4 +10,12 @@
     <item name="forgotPassword" type="id" />
     <item name="guest_mode_button" type="id" />
     <item name="tvGameResult" type="id" />
+    <item name="myTeamTextView" type="id" />
+    <item name="opponentTeamTextView" type="id" />
+    <item name="simulateButton" type="id" />
+    <item name="tvMinute" type="id" />
+    <item name="tvEvent" type="id" />
+    <item name="tvTable" type="id" />
+    <item name="btnBack" type="id" />
+    <item name="tvLeagueTable" type="id" />
 </resources>
